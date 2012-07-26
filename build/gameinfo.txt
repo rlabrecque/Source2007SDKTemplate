@@ -1,0 +1,35 @@
+"GameInfo"
+{
+	// This is what shows up in the 'Third Party Games' area of the Steam games list.
+	game						"Source2007SDKTemplate"
+	title	"Source2007SDKTemplate"				// Main Menu large Text
+	title2	"based on sdk template technology"	// Main Menu small text
+	type 						multiplayer_only
+//	type 						singleplayer_only
+
+	hidden_maps
+	{
+		// Hide maps from the start server dialog
+		"test_speakers"		1
+		"test_hardware"		1
+	}
+	FileSystem
+	{
+		SteamAppId				218		// GCF for Source SDK Base 2007
+		ToolsAppId				211		// Tools will load this (ie: source SDK caches) to get things like materials\debug, materials\editor, etc.
+
+		//Orange box sdk allows an extra appid to be defined here to mount additional content. 240 is CounterStrike: Source
+		//AdditionalContentId			240
+
+		SearchPaths
+		{
+			Game				|gameinfo_path|.
+			Game				|all_source_engine_paths|sourcetest
+
+			//For the example above; if including 240, mount the cstrike folder.
+			//Game				|all_source_engine_paths|cstrike
+
+			Game				|all_source_engine_paths|hl2
+		}
+	}
+}
