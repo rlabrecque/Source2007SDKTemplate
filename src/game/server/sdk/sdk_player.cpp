@@ -577,13 +577,15 @@ int CSDKPlayer::OnTakeDamage( const CTakeDamageInfo &inputInfo )
 	float flArmorRatio = 0.5f;
 	float flDamage = info.GetDamage();
 
+	//Tony; re-work this so if you're not dealing with teams at all, you can still be hurt by the world.
+	//and that it always runs through here if friendly fire is off.
 	bool bCheckFriendlyFire = false;
 	bool bFriendlyFire = friendlyfire.GetBool();
 	//Tony; only check teams in teamplay
-	if ( gpGlobals->teamplay )
+	if ( gpGlobals->teamplay && bFriendlyFire )
 		bCheckFriendlyFire = true;
 
-	if ( bFriendlyFire || ( bCheckFriendlyFire && pInflictor->GetTeamNumber() != GetTeamNumber() ) || pInflictor == this ||	info.GetAttacker() == this )
+	if ( !bCheckFriendlyFire || ( bCheckFriendlyFire && pInflictor->GetTeamNumber() != GetTeamNumber() ) || pInflictor == this || info.GetAttacker() == this )
 	{
 		if ( bFriendlyFire && (info.GetDamageType() & DMG_BLAST) == 0 )
 		{
